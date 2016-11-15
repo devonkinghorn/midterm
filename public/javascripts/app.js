@@ -2,36 +2,52 @@ angular.module('comment', [])
   .controller('MainCtrl', [
     '$scope', '$http',
     function ($scope, $http) {
-      $scope.dogs = [];
-      $scope.addDog = function () {
-        var newDog = { name: $scope.name, upvotes: 0, breed: $scope.breed };
-        $scope.name = '';
-        $scope.breed = '';
-        $http.post('/dogs', newDog).success(function (dog) {
-          $scope.dogs.push(dog);
+      $scope.cars = [];
+      $scope.addCar = function () {
+        var newCar = {
+          make: $scope.make,
+          upvotes: 0,
+          model: $scope.model,
+          year: $scope.year,
+          miles: $scope.miles,
+          picture: $scope.picture
+        };
+        if(!(newCar.make && newCar.model && newCar.year && newCar.miles )){
+          alert("Failed to insert. \n need to have a make, model, year, and miles")
+          return;
+        }
+        $scope.make = '';
+        $scope.model = '';
+        $scope.year = '';
+        $scope.miles = '';
+        $scope.picture = '';
+
+        $http.post('/cars', newCar).success(function (car) {
+          $scope.cars.push(car);
         });
       };
-      $scope.upvote = function (dog) {
-        return $http.put('/dogs/' + dog._id + '/upvote')
+      $scope.upvote = function (car) {
+        return $http.put('/cars/' + car._id + '/upvote')
           .success(function (data) {
             console.log("upvote worked");
-            dog.upvotes = data.upvotes;
-            console.log($scope.dogs)
+            car.upvotes = data.upvotes;
+            console.log($scope.cars)
           });
       };
       $scope.incrementUpvotes = function (dog) {
         $scope.upvote(dog);
       };
       $scope.delete = function (comment) {
-        $http.delete('/dogs/' + comment._id)
+        console.log(comment)
+        $http.delete('/cars/' + comment._id)
           .success(function (data) {
             console.log("delete worked");
           });
         $scope.getAll();
       };
       $scope.getAll = function () {
-        return $http.get('/dogs').success(function (data) {
-          angular.copy(data, $scope.dogs);
+        return $http.get('/cars').success(function (data) {
+          angular.copy(data, $scope.cars);
         });
       };
       $scope.getAll();

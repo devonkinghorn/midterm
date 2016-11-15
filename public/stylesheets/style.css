@@ -2,7 +2,18 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+td {
+  padding:10px;
+  min-height:60px;
+}
+tr:nth-child(2n+1) {
+  background: #CCC
+}
 
 a {
   color: #00B7FF;
+}
+.carImage {
+  max-width:70px;
+  max-height:40px;
 }

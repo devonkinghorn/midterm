@@ -1,30 +1,54 @@
 <html>
+
 <head>
-  <title>Comments</title>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-  <script src="javascripts/app.js"></script>
+	<title>Comments</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<script src="javascripts/app.js"></script>
 
 </head>
-<body ng-app="comment" ng-controller="MainCtrl">
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-<div class="page-header"> 
-  <h1>Comments </h1>
-</div>
 
-  <form ng-submit="addDog()" style = "margin-top30px;">
-    <input placeholder='dog name' type="text" ng-model="name"></input>
-    <input placeholder='breed' type="text" ng-model="breed"></input>
-    <button type="submit">Add Comment</button>
-  </form>
-  <div ng-repeat="dog in dogs | orderBy: '-upvotes' | orderBy: 'breed'">
-    <span class="glyphicon glyphicon-remove" ng-click="delete(dog)"></span>
-    <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(dog)"></span>
-    {{dog.name}} {{dog.breed}} - upvotes: {{dog.upvotes}}
-  </div>
-</div>
-</div>
+<body ng-app="comment" ng-controller="MainCtrl">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="page-header">
+				<h1>BYU Car Rater </h1>
+			</div>
+
+			<form ng-submit="addCar()" style="margin-top30px;">
+				<input placeholder='Make' type="text" ng-model="make"></input>
+				<input placeholder='Model' type="text" ng-model="model"></input>
+				<input placeholder='Year' type="text" ng-model="year"></input>
+				<input placeholder='Miles' type="text" ng-model="miles"></input>
+				<input placeholder='Picture URL' type="text" ng-model="picture"></input>
+				<button type="submit">Add Car</button>
+			</form>
+			<table>
+				<tr>
+					<td>Like</td>
+					<td>Image</td>
+					<td>Make</td>
+					<td>Model</td>
+					<td>Year</td>
+					<td>Miles</td>
+					<td>Upvotes</td>
+					<td>Delete</td>
+				</tr>
+				<tr ng-repeat="car in cars | orderBy: '-upvotes' | orderBy: 'model'| orderBy: 'make'">
+
+					<td><span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(car)"></span> </td>
+					<td><img class='carImage' src='{{car.picture || "http://www.clipartbest.com/cliparts/9Tz/xXn/9TzxXnaxc.png"}}'></td>
+					<td>{{car.make}}</td>
+					<td>{{car.model}}</td>
+					<td>{{car.year}}</td>
+					<td>{{car.miles}}</td>
+					<td>{{car.upvotes}}</td>
+					<td> <span class="glyphicon glyphicon-remove" ng-click="delete(car)"></span></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 </body>
+
 </html>

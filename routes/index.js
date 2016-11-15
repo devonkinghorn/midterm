@@ -1,18 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Comment = mongoose.model('Dog');
+var Comment = mongoose.model('Car');
 
-router.get('/dogs', function(req, res, next) {
+router.get('/cars', function(req, res, next) {
   Comment.find(function(err, comments){
     if(err){ return next(err); }
     res.json(comments);
   });
 });
 
-router.post('/dogs', function(req, res, next) {
-  var dog = new Comment(req.body);
-  dog.save(function(err, comment){
+router.post('/cars', function(req, res, next) {
+  var car = new Comment(req.body);
+  car.save(function(err, comment){
     if(err){ return next(err); }
     res.json(comment);
   });
@@ -20,28 +20,28 @@ router.post('/dogs', function(req, res, next) {
 
 
 
-router.param('dog', function(req, res, next, id) {
+router.param('car', function(req, res, next, id) {
   var query = Comment.findById(id);
-  query.exec(function (err, dog){
+  query.exec(function (err, car){
     if (err) { return next(err); }
-    if (!dog) { return next(new Error("can't find comment")); }
-    req.dog = dog;
+    if (!car) { return next(new Error("can't find comment")); }
+    req.car = car;
     return next();
   });
 });
-router.delete('/dogs/:dog', function(req, res) {
+router.delete('/cars/:car', function(req, res) {
   console.log("in Delete");
-  req.dog.remove();
-  res.json(req.dog);
+  req.car.remove();
+  res.json(req.car);
 });
-router.get('/dogs/:dog', function(req, res) {
-  res.json(req.dog);
+router.get('/cars/:car', function(req, res) {
+  res.json(req.car);
 });
 
-router.put('/dogs/:dog/upvote', function(req, res, next) {
-  req.dog.upvote(function(err, dog){
+router.put('/cars/:car/upvote', function(req, res, next) {
+  req.car.upvote(function(err, car){
     if (err) { return next(err); }
-    res.json(dog);
+    res.json(car);
   });
 });
 module.exports = router;
