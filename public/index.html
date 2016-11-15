@@ -3,6 +3,7 @@
   <title>Comments</title>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   <script src="javascripts/app.js"></script>
 
 </head>
@@ -13,16 +14,15 @@
   <h1>Comments </h1>
 </div>
 
-  <form ng-submit="addComment()" style = "margin-top30px;">
-    <input type="text" ng-model="formContent"></input>
+  <form ng-submit="addDog()" style = "margin-top30px;">
+    <input placeholder='dog name' type="text" ng-model="name"></input>
+    <input placeholder='breed' type="text" ng-model="breed"></input>
     <button type="submit">Add Comment</button>
   </form>
-  <div>
-    {{test}}
-  </div>
-  <div ng-repeat="comment in comments | orderBy: '-upvotes'">
-    <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
-    {{comment.title}} - upvotes: {{comment.upvotes}}
+  <div ng-repeat="dog in dogs | orderBy: '-upvotes' | orderBy: 'breed'">
+    <span class="glyphicon glyphicon-remove" ng-click="delete(dog)"></span>
+    <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(dog)"></span>
+    {{dog.name}} {{dog.breed}} - upvotes: {{dog.upvotes}}
   </div>
 </div>
 </div>
