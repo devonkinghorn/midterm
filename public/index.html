@@ -22,6 +22,8 @@
 				<input placeholder='Year' type="text" ng-model="year"></input>
 				<input placeholder='Miles' type="text" ng-model="miles"></input>
 				<input placeholder='Picture URL' type="text" ng-model="picture"></input>
+				<input placeholder='Email' type="text" ng-model="email"></input>
+				
 				<button type="submit">Add Car</button>
 			</form>
 			<table>
@@ -33,6 +35,7 @@
 					<td>Year</td>
 					<td>Miles</td>
 					<td>Upvotes</td>
+					<td>Contact</td>
 					<td>Delete</td>
 				</tr>
 				<tr ng-repeat="car in cars | orderBy: '-upvotes' | orderBy: 'model'| orderBy: 'make'">
@@ -44,6 +47,7 @@
 					<td>{{car.year}}</td>
 					<td>{{car.miles}}</td>
 					<td>{{car.upvotes}}</td>
+					<td><a href="mailto:{{car.email}}">{{car.email}}</a></td>
 					<td> <span class="glyphicon glyphicon-remove" ng-click="delete(car)"></span></td>
 				</tr>
 			</table>

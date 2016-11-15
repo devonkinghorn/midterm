@@ -10,7 +10,8 @@ angular.module('comment', [])
           model: $scope.model,
           year: $scope.year,
           miles: $scope.miles,
-          picture: $scope.picture
+          picture: $scope.picture,
+          email: $scope.email
         };
         if(!(newCar.make && newCar.model && newCar.year && newCar.miles )){
           alert("Failed to insert. \n need to have a make, model, year, and miles")

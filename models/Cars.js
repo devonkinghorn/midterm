@@ -6,6 +6,7 @@ var CarSchema = new mongoose.Schema({
   miles : String,
   picture : String,
   upvotes: {type: Number, default: 0},
+  email : String,
 });
 CarSchema.methods.upvote = function(cb) {
   this.upvotes += 1;
